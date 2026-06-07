@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { RotateCcw } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Employee } from '../types/employee'
@@ -23,6 +23,8 @@ const LIFT_DURATION = 0.85
 const LIFTED_Y = -72
 const LIFTED_SCALE = 0.94
 
+const SKIP_GRACE_MS = 450
+
 interface GachaStageProps {
   employee: Employee
 }
@@ -34,9 +36,19 @@ export function GachaStage({ employee }: GachaStageProps) {
   const [skipped, setSkipped] = useState(false)
   const [animationKey, setAnimationKey] = useState(0)
   const [burstKey, setBurstKey] = useState(0)
+  const skipEnabledRef = useRef(false)
+
+  useEffect(() => {
+    skipEnabledRef.current = false
+    const timeoutId = setTimeout(() => {
+      skipEnabledRef.current = true
+    }, SKIP_GRACE_MS)
+
+    return () => clearTimeout(timeoutId)
+  }, [animationKey, employee.name])
 
   const skip = useCallback(() => {
-    if (phase === 'complete') return
+    if (!skipEnabledRef.current || phase === 'complete') return
     setSkipped(true)
     setPhase('complete')
   }, [phase])
@@ -91,6 +103,7 @@ export function GachaStage({ employee }: GachaStageProps) {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.repeat) return
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault()
         skip()

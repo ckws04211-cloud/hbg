@@ -21,5 +21,5 @@ export function EmployeeDetailPage() {
     )
   }
 
-  return <GachaStage employee={employee} />
+  return <GachaStage key={employee.name} employee={employee} />
 }
