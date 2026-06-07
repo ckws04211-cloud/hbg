@@ -4,6 +4,8 @@ import type { Employee } from '../types/employee'
 import type { ColorTheme } from '../utils/colorTheme'
 import { toRgba } from '../utils/colorTheme'
 
+const CARD_RADIUS = 'rounded-3xl'
+
 interface EmployeeIdCardProps {
   employee: Employee
   theme: ColorTheme
@@ -11,6 +13,7 @@ interface EmployeeIdCardProps {
   heroGlow?: boolean
   playFlip?: boolean
   scale?: number
+  instant?: boolean
 }
 
 export function EmployeeIdCard({
@@ -20,6 +23,7 @@ export function EmployeeIdCard({
   heroGlow = false,
   playFlip = false,
   scale = 1,
+  instant = false,
 }: EmployeeIdCardProps) {
   const [imageError, setImageError] = useState(false)
 
@@ -47,7 +51,9 @@ export function EmployeeIdCard({
   return (
     <motion.div
       animate={{ scale }}
-      transition={{ type: 'spring', stiffness: heroGlow ? 100 : 120, damping: 18 }}
+      transition={
+        instant ? { duration: 0 } : { type: 'spring', stiffness: heroGlow ? 100 : 120, damping: 18 }
+      }
       style={{ perspective: 1200, transformStyle: 'preserve-3d' }}
       className="relative w-full"
     >
@@ -57,14 +63,14 @@ export function EmployeeIdCard({
             initial={{ opacity: 0.9, scale: 0.5 }}
             animate={{ opacity: 0, scale: 2.8 }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            className="pointer-events-none absolute inset-0 z-10 rounded-2xl"
+            className={`pointer-events-none absolute inset-0 z-10 ${CARD_RADIUS}`}
             style={{ boxShadow: `0 0 100px 40px ${toRgba(theme.main, 0.55)}` }}
           />
           <motion.div
             initial={{ opacity: 0.6, scale: 0.8 }}
             animate={{ opacity: 0, scale: 1.6 }}
             transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-            className="pointer-events-none absolute -inset-1 z-0 rounded-2xl border-2"
+            className={`pointer-events-none absolute -inset-1 z-0 border-2 ${CARD_RADIUS}`}
             style={{ borderColor: toRgba(theme.light, 0.5) }}
           />
         </>
@@ -88,14 +94,14 @@ export function EmployeeIdCard({
             : { duration: 0 }
         }
         style={{ transformStyle: 'preserve-3d', ...cardStyle }}
-        className="relative w-full overflow-hidden rounded-2xl border-2 bg-zinc-900"
+        className={`relative w-full overflow-hidden border-2 bg-zinc-900 ${CARD_RADIUS}`}
       >
         {heroGlow && (
           <motion.div
             initial={{ opacity: 0.5 }}
             animate={{ opacity: [0.5, 0.15, 0.35] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="pointer-events-none absolute inset-0 z-10 rounded-2xl"
+            className={`pointer-events-none absolute inset-0 z-10 ${CARD_RADIUS}`}
             style={{ boxShadow: `inset 0 0 60px ${toRgba(theme.main, 0.12)}` }}
           />
         )}
@@ -124,13 +130,6 @@ export function EmployeeIdCard({
               <span className="mt-1 text-sm text-zinc-500">{employee.arcana}</span>
             </div>
           )}
-        </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent p-6 pt-16">
-          <p className="text-xs" style={{ color: theme.accentText }}>
-            {employee.employeeNumber}
-          </p>
-          <p className="text-xl font-bold text-zinc-100">{employee.name}</p>
-          <p className="text-sm text-zinc-400">{employee.arcana}</p>
         </div>
       </motion.div>
     </motion.div>

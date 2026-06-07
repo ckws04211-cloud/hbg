@@ -23,7 +23,7 @@ export function EmployeeListCard({ employee }: EmployeeListCardProps) {
     <Link
       to={getEmployeePath(employee.name)}
       style={hoverStyle}
-      className="group block overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 transition duration-300 hover:scale-[1.02] hover:[border-color:var(--hover-border)] hover:[box-shadow:var(--hover-glow)]"
+      className="group block overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900/50 transition duration-300 hover:scale-[1.02] hover:[border-color:var(--hover-border)] hover:[box-shadow:var(--hover-glow)]"
     >
       <div className="relative aspect-[3/2] overflow-hidden bg-zinc-800">
         {!imageError ? (

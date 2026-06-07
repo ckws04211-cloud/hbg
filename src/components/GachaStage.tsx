@@ -37,6 +37,8 @@ export function GachaStage({ employee }: GachaStageProps) {
   const [animationKey, setAnimationKey] = useState(0)
   const [burstKey, setBurstKey] = useState(0)
   const skipEnabledRef = useRef(false)
+  const skippedRef = useRef(false)
+  const phaseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     skipEnabledRef.current = false
@@ -47,11 +49,20 @@ export function GachaStage({ employee }: GachaStageProps) {
     return () => clearTimeout(timeoutId)
   }, [animationKey, employee.name])
 
+  const clearPhaseTimeout = useCallback(() => {
+    if (phaseTimeoutRef.current) {
+      clearTimeout(phaseTimeoutRef.current)
+      phaseTimeoutRef.current = null
+    }
+  }, [])
+
   const skip = useCallback(() => {
     if (!skipEnabledRef.current || phase === 'complete') return
+    skippedRef.current = true
+    clearPhaseTimeout()
     setSkipped(true)
     setPhase('complete')
-  }, [phase])
+  }, [phase, clearPhaseTimeout])
 
   const replay = useCallback(() => {
     if (reducedMotion) {
@@ -60,6 +71,7 @@ export function GachaStage({ employee }: GachaStageProps) {
       return
     }
     setSkipped(false)
+    skippedRef.current = false
     setPhase('quote')
     setAnimationKey((key) => key + 1)
     setBurstKey((key) => key + 1)
@@ -67,6 +79,9 @@ export function GachaStage({ employee }: GachaStageProps) {
 
   useEffect(() => {
     if (reducedMotion) return
+
+    skippedRef.current = false
+    clearPhaseTimeout()
 
     const sequence: Exclude<GachaPhase, 'complete'>[] = [
       'quote',
@@ -76,9 +91,10 @@ export function GachaStage({ employee }: GachaStageProps) {
       'details',
     ]
     let index = 0
-    let timeoutId: ReturnType<typeof setTimeout>
 
     const scheduleNext = () => {
+      if (skippedRef.current) return
+
       index++
       if (index >= sequence.length) {
         setPhase('complete')
@@ -90,16 +106,16 @@ export function GachaStage({ employee }: GachaStageProps) {
         nextPhase === 'quote'
           ? quoteRevealDuration(employee.quote) + 600
           : PHASE_DELAYS[nextPhase]
-      timeoutId = setTimeout(scheduleNext, delay)
+      phaseTimeoutRef.current = setTimeout(scheduleNext, delay)
     }
 
-    timeoutId = setTimeout(
+    phaseTimeoutRef.current = setTimeout(
       scheduleNext,
       quoteRevealDuration(employee.quote) + 600,
     )
 
-    return () => clearTimeout(timeoutId)
-  }, [reducedMotion, animationKey, employee.quote])
+    return () => clearPhaseTimeout()
+  }, [reducedMotion, animationKey, employee.quote, clearPhaseTimeout])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -117,9 +133,9 @@ export function GachaStage({ employee }: GachaStageProps) {
   const isAnimating = phase !== 'complete' && !skipped
   const showBurst = !skipped && !reducedMotion && ['burst', 'card'].includes(phase)
   const showHeroQuote = phase === 'quote' && !skipped
-  const showCard = ['card', 'details', 'complete'].includes(phase)
-  const showFooter = ['details', 'complete'].includes(phase)
-  const showDetails = ['details', 'complete'].includes(phase)
+  const showCard = skipped || ['card', 'details', 'complete'].includes(phase)
+  const showFooter = skipped || ['details', 'complete'].includes(phase)
+  const showDetails = skipped || ['details', 'complete'].includes(phase)
   const showInfo = phase === 'complete'
   const playFlip = !skipped && !reducedMotion && phase === 'card'
   const showCardFlash = !skipped && !reducedMotion && phase === 'card'
@@ -130,7 +146,7 @@ export function GachaStage({ employee }: GachaStageProps) {
   const stackY = isLifted ? LIFTED_Y : 0
   const cardScale = isLifted ? LIFTED_SCALE : 1
   const liftTransition = skipped
-    ? { duration: 0.15 }
+    ? { duration: 0 }
     : { duration: LIFT_DURATION, ease: LIFT_EASE }
 
   return (
@@ -225,10 +241,11 @@ export function GachaStage({ employee }: GachaStageProps) {
               <EmployeeIdCard
                 employee={employee}
                 theme={theme}
-                heroGlow={phase === 'card'}
+                heroGlow={!skipped && phase === 'card'}
                 showGlow
                 playFlip={playFlip}
                 scale={cardScale}
+                instant={skipped}
               />
             </div>
           )}
@@ -263,8 +280,12 @@ export function GachaStage({ employee }: GachaStageProps) {
             key={`hero-quote-${animationKey}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 0.97, filter: 'blur(8px)' }}
-            transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+            exit={
+              skipped
+                ? { opacity: 0, transition: { duration: 0 } }
+                : { opacity: 0, scale: 0.97, filter: 'blur(8px)' }
+            }
+            transition={{ duration: skipped ? 0 : 0.45, ease: [0.4, 0, 0.2, 1] }}
             className="pointer-events-none fixed inset-0 z-30 flex items-center justify-center px-4"
           >
             <QuoteReveal
