@@ -31,7 +31,7 @@
     "employeeNumber": "HBG-25-0428",
     "rank": "대리",
     "arcana": "다크메이지",
-    "quote": "빵가루~",
+    "quote": "냐심카~",
     "color": "#ECEBF6",
     "image": "/images/employees/최소유.png"
   },
@@ -43,5 +43,14 @@
     "quote": "먹어",
     "color": "#E92139",
     "image": "/images/employees/매난국죽.png"
+  },
+  {
+    "name": "김쥬쥬",
+    "employeeNumber": "HBG-26-0418",
+    "rank": "사원",
+    "arcana": "세인트바드",
+    "quote": "핫시... 머하지.. 대사? 잠만..",
+    "color": "#C0BBB8",
+    "image": "/images/employees/김쥬쥬.png"
   }
 ]
