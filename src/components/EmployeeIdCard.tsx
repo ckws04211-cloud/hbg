@@ -94,7 +94,7 @@ export function EmployeeIdCard({
             : { duration: 0 }
         }
         style={{ transformStyle: 'preserve-3d', ...cardStyle }}
-        className={`relative w-full overflow-hidden border-2 bg-zinc-900 ${CARD_RADIUS}`}
+        className={`relative w-full overflow-hidden border-2 bg-hbg-surface ${CARD_RADIUS}`}
       >
         {heroGlow && (
           <motion.div

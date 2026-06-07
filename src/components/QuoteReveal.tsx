@@ -134,9 +134,9 @@ export function QuoteReveal({
   const isMultiline = quote.includes('\n')
   const className = isHero
     ? isMultiline
-      ? 'max-w-xl px-6 text-center text-xl font-medium leading-relaxed text-zinc-100 sm:text-2xl'
-      : 'max-w-lg px-6 text-center text-2xl font-medium leading-relaxed text-zinc-100 sm:text-3xl'
-    : 'max-w-md px-6 text-center text-base leading-relaxed text-zinc-400 whitespace-pre-line'
+      ? 'max-w-3xl px-4 text-center font-display text-xl font-medium leading-relaxed text-hbg-cream sm:px-6 sm:text-2xl'
+      : 'max-w-2xl px-4 text-center font-display text-2xl font-medium leading-relaxed text-hbg-cream sm:px-6 sm:text-3xl'
+    : 'max-w-xl px-6 text-center text-base leading-relaxed text-hbg-cream/70 whitespace-pre-line'
 
   const text = (
     <QuoteText quote={quote} theme={theme} animate={animate} className={className} />

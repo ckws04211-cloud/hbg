@@ -9,11 +9,11 @@ export function EmployeeDetailPage() {
 
   if (!employee) {
     return (
-      <div className="flex min-h-svh flex-col items-center justify-center bg-zinc-950 px-4 text-center">
-        <p className="text-xl text-zinc-400">사원을 찾을 수 없습니다.</p>
+      <div className="flex min-h-svh flex-col items-center justify-center px-4 text-center">
+        <p className="font-display text-xl text-hbg-cream/70">사원을 찾을 수 없습니다.</p>
         <Link
           to="/"
-          className="mt-6 rounded-xl border border-amber-500/40 bg-amber-500/10 px-6 py-2.5 text-sm font-medium text-amber-300 transition hover:bg-amber-500/20"
+          className="mt-6 rounded-xl border border-hbg-gold/30 bg-hbg-gold/10 px-6 py-2.5 text-sm font-medium text-hbg-gold-light transition hover:border-hbg-gold/50 hover:bg-hbg-gold/15"
         >
           목록으로
         </Link>

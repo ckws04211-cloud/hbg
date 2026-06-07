@@ -17,10 +17,10 @@ export function SearchBar({ query, onQueryChange, resultCount }: SearchBarProps)
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
           placeholder="사원 이름을 검색하세요..."
-          className="w-full rounded-xl border border-zinc-700/80 bg-zinc-900/80 px-5 py-3.5 pl-12 text-zinc-100 placeholder:text-zinc-500 outline-none transition focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20"
+          className="w-full rounded-xl border border-hbg-gold/20 bg-hbg-surface/90 px-5 py-3.5 pl-12 text-hbg-cream placeholder:text-hbg-cream/30 outline-none transition focus:border-hbg-gold/50 focus:ring-2 focus:ring-hbg-gold/15"
         />
         <svg
-          className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500"
+          className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-hbg-gold/45"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -33,7 +33,7 @@ export function SearchBar({ query, onQueryChange, resultCount }: SearchBarProps)
           />
         </svg>
       </div>
-      <p className="mt-2 text-center text-sm text-zinc-500">
+      <p className="mt-2 text-center text-sm text-hbg-cream/40">
         {resultCount}명의 사원
       </p>
     </div>

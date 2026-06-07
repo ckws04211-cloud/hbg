@@ -26,25 +26,21 @@ export function EmployeeDetailsReveal({
       <div className="h-px w-24 opacity-40" style={dividerStyle} />
 
       <div>
-        <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-zinc-500">
+        <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-hbg-gold/55">
           직급
         </p>
-        <p className="mt-1 text-2xl font-semibold text-zinc-300">{employee.rank}</p>
+        <p className="mt-1 text-2xl font-semibold text-hbg-cream/90">{employee.rank}</p>
       </div>
 
-      <p className="text-xs text-zinc-500">{employee.employeeNumber}</p>
-      <h2 className="text-lg font-medium text-zinc-300">{employee.name}</h2>
-      <p className="text-sm text-zinc-500">{employee.arcana}</p>
+      <p className="text-xs text-hbg-cream/45">{employee.employeeNumber}</p>
+      <h2 className="text-lg font-medium text-hbg-cream/85">{employee.name}</h2>
+      <p className="text-sm text-hbg-cream/45">{employee.arcana}</p>
 
       <div className={showButton ? 'mt-1' : 'invisible mt-1 h-[34px]'} aria-hidden={!showButton}>
         <Link
           to="/"
           tabIndex={showButton ? 0 : -1}
-          className="inline-block rounded-lg px-5 py-2 text-xs font-medium text-zinc-400 transition hover:text-zinc-200"
-          style={{
-            border: `1px solid ${toRgba(theme.main, 0.2)}`,
-            backgroundColor: toRgba(theme.main, 0.05),
-          }}
+          className="inline-block rounded-lg border border-hbg-gold/25 bg-hbg-gold/8 px-5 py-2 text-xs font-medium text-hbg-gold-light transition hover:border-hbg-gold/40 hover:bg-hbg-gold/12 hover:text-hbg-cream"
         >
           목록으로
         </Link>

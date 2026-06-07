@@ -79,4 +79,4 @@ export function createColorTheme(color: string): ColorTheme {
   }
 }
 
-export const DEFAULT_THEME_COLOR = '#FFD700'
+export const DEFAULT_THEME_COLOR = '#C9A962'

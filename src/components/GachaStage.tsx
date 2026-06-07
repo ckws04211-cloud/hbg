@@ -151,7 +151,7 @@ export function GachaStage({ employee }: GachaStageProps) {
 
   return (
     <div
-      className="relative min-h-svh overflow-hidden bg-zinc-950"
+      className="relative min-h-svh overflow-hidden bg-transparent"
       onClick={skip}
       role="presentation"
     >
@@ -202,7 +202,7 @@ export function GachaStage({ employee }: GachaStageProps) {
       <ParticleBurst key={burstKey} active={showBurst} theme={theme} intense={phase === 'card'} />
 
       {isAnimating && (
-        <p className="pointer-events-none fixed bottom-8 left-1/2 z-40 -translate-x-1/2 text-xs text-zinc-600">
+        <p className="pointer-events-none fixed bottom-8 left-1/2 z-40 -translate-x-1/2 text-xs text-hbg-cream/30">
           클릭 또는 Enter로 연출 스킵
         </p>
       )}
@@ -217,11 +217,9 @@ export function GachaStage({ employee }: GachaStageProps) {
             event.stopPropagation()
             replay()
           }}
-          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-zinc-900/90 backdrop-blur transition hover:scale-105 hover:bg-zinc-800"
+          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-hbg-gold/25 bg-hbg-surface/92 text-hbg-gold-light backdrop-blur transition hover:scale-105 hover:border-hbg-gold/45 hover:bg-hbg-elevated"
           style={{
-            border: `1px solid ${theme.buttonBorder}`,
-            color: theme.buttonText,
-            boxShadow: theme.buttonShadow,
+            boxShadow: '0 0 24px rgba(201, 169, 98, 0.12)',
           }}
           aria-label="애니메이션 다시 보기"
           title="애니메이션 다시 보기"

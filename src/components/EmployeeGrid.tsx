@@ -8,9 +8,9 @@ interface EmployeeGridProps {
 export function EmployeeGrid({ employees }: EmployeeGridProps) {
   if (employees.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-zinc-800 py-20 text-center">
-        <p className="text-lg text-zinc-400">검색 결과가 없습니다.</p>
-        <p className="mt-2 text-sm text-zinc-600">다른 이름으로 검색해 보세요.</p>
+      <div className="rounded-2xl border border-dashed border-hbg-gold/20 bg-hbg-surface/40 py-20 text-center">
+        <p className="font-display text-lg text-hbg-cream/70">검색 결과가 없습니다.</p>
+        <p className="mt-2 text-sm text-hbg-cream/40">다른 이름으로 검색해 보세요.</p>
       </div>
     )
   }

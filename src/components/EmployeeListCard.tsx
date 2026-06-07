@@ -13,19 +13,21 @@ export function EmployeeListCard({ employee }: EmployeeListCardProps) {
   const theme = useMemo(() => createColorTheme(employee.color), [employee.color])
 
   const hoverStyle = {
-    '--hover-border': toRgba(theme.main, 0.45),
-    '--hover-glow': `0 0 30px ${toRgba(theme.main, 0.2)}, 0 0 60px ${toRgba(theme.main, 0.08)}`,
+    '--hover-border': toRgba(theme.main, 0.5),
+    '--hover-glow': `0 0 28px ${toRgba(theme.main, 0.22)}, 0 0 56px ${toRgba(theme.main, 0.08)}`,
     '--hover-text': theme.light,
-    '--rank-bg': toRgba(theme.main, 0.9),
+    '--rank-border': toRgba(theme.main, 0.55),
+    '--rank-bg': toRgba(theme.main, 0.16),
+    '--rank-text': theme.light,
   } as React.CSSProperties
 
   return (
     <Link
       to={getEmployeePath(employee.name)}
       style={hoverStyle}
-      className="group block overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900/50 transition duration-300 hover:scale-[1.02] hover:[border-color:var(--hover-border)] hover:[box-shadow:var(--hover-glow)]"
+      className="group block overflow-hidden rounded-3xl border border-hbg-gold/12 bg-hbg-surface/75 transition duration-300 hover:scale-[1.02] hover:[border-color:var(--hover-border)] hover:[box-shadow:var(--hover-glow)]"
     >
-      <div className="relative aspect-[3/2] overflow-hidden bg-zinc-800">
+      <div className="relative aspect-[3/2] overflow-hidden bg-hbg-bg">
         {!imageError ? (
           <img
             src={employee.image}
@@ -35,31 +37,35 @@ export function EmployeeListCard({ employee }: EmployeeListCardProps) {
           />
         ) : (
           <div
-            className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950"
+            className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-hbg-elevated via-hbg-surface to-hbg-bg"
             style={{
-              backgroundImage: `linear-gradient(to bottom right, rgb(39 39 42), rgb(24 24 27), ${toRgba(theme.main, 0.15)})`,
+              backgroundImage: `linear-gradient(to bottom right, rgb(28 25 22), rgb(20 18 16), ${toRgba(theme.main, 0.12)})`,
             }}
           >
             <span className="text-4xl font-bold" style={{ color: toRgba(theme.main, 0.35) }}>
               {employee.rank}
             </span>
-            <span className="mt-2 text-sm text-zinc-500">이미지 없음</span>
+            <span className="mt-2 text-sm text-hbg-cream/35">이미지 없음</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-hbg-bg/70 via-transparent to-transparent opacity-50" />
         <span
-          className="absolute right-3 top-3 rounded-md px-2 py-0.5 text-xs font-bold text-zinc-950 transition-colors duration-300 group-hover:[background-color:var(--rank-bg)]"
-          style={{ backgroundColor: toRgba(theme.main, 0.75) }}
+          className="absolute right-3 top-3 rounded-md border px-2 py-0.5 text-xs font-semibold backdrop-blur-sm transition-colors duration-300 group-hover:[background-color:var(--rank-bg)] group-hover:[border-color:var(--rank-border)] group-hover:[color:var(--rank-text)]"
+          style={{
+            borderColor: 'rgba(201, 169, 98, 0.25)',
+            backgroundColor: 'rgba(10, 9, 8, 0.72)',
+            color: 'rgba(232, 213, 163, 0.9)',
+          }}
         >
           {employee.rank}
         </span>
       </div>
-      <div className="p-4 text-left">
-        <p className="text-xs text-zinc-600">{employee.employeeNumber}</p>
-        <h3 className="mt-1 text-lg font-semibold text-zinc-100 transition-colors duration-300 group-hover:[color:var(--hover-text)]">
+      <div className="border-t border-hbg-gold/8 p-4 text-left">
+        <p className="text-xs tracking-wide text-hbg-gold/45">{employee.employeeNumber}</p>
+        <h3 className="mt-1 text-lg font-semibold text-hbg-cream transition-colors duration-300 group-hover:[color:var(--hover-text)]">
           {employee.name}
         </h3>
-        <p className="mt-1 text-sm text-zinc-500">{employee.arcana}</p>
+        <p className="mt-1 text-sm text-hbg-cream/45">{employee.arcana}</p>
       </div>
     </Link>
   )
