@@ -1,0 +1,47 @@
+[
+  {
+    "name": "호갱군",
+    "employeeNumber": "HBG-24-1017",
+    "rank": "점장",
+    "arcana": "퓨리파이터",
+    "quote": "ㅇㄱㅇ/",
+    "color": "#C37B4E",
+    "image": "/images/employees/호갱군.png"
+  },
+  {
+    "name": "다람정",
+    "employeeNumber": "HBG-25-0726",
+    "rank": "부점장",
+    "arcana": "엘레멘탈나이트",
+    "quote": "이것만은 안꺼내려 했는데...",
+    "color": "#f5e9d9",
+    "image": "/images/employees/다람정.png"
+  },
+  {
+    "name": "우상현",
+    "employeeNumber": "HBG-24-0718",
+    "rank": "과장",
+    "arcana": "세이크리드가드",
+    "quote": "반갑다",
+    "color": "#EFC1C3",
+    "image": "/images/employees/우상현.png"
+  },
+  {
+    "name": "최소유",
+    "employeeNumber": "HBG-25-0428",
+    "rank": "대리",
+    "arcana": "다크메이지",
+    "quote": "빵가루~",
+    "color": "#ECEBF6",
+    "image": "/images/employees/최소유.png"
+  },
+  {
+    "name": "매난국죽",
+    "employeeNumber": "HBG-26-0329",
+    "rank": "사원",
+    "arcana": "세인트바드",
+    "quote": "먹어",
+    "color": "#E92139",
+    "image": "/images/employees/매난국죽.png"
+  }
+]

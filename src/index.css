@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "pretendard/dist/web/variable/pretendardvariable.css";
+
+@theme {
+  --color-gold: #ffd700;
+  --color-gold-light: #ffe566;
+  --color-gold-dark: #b8860b;
+  --font-sans:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    @apply m-0 min-h-svh bg-zinc-950 font-sans text-zinc-100 antialiased;
+  }
+
+  #root {
+    @apply min-h-svh;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #fff8dc 0%, #ffd700 40%, #ffaa00 70%, #fff8dc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .shimmer {
+    background-size: 200% auto;
+    animation: shimmer 2s linear infinite;
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  .glow-gold {
+    text-shadow:
+      0 0 10px rgba(255, 215, 0, 0.8),
+      0 0 30px rgba(255, 215, 0, 0.5),
+      0 0 60px rgba(255, 170, 0, 0.3);
+  }
+
+  .card-glow {
+    box-shadow:
+      0 0 20px rgba(255, 215, 0, 0.3),
+      0 0 60px rgba(255, 215, 0, 0.15),
+      inset 0 0 20px rgba(255, 215, 0, 0.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer {
+    animation: none;
+  }
+}
